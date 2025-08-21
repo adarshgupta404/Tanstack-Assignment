@@ -50,6 +50,7 @@ import {
   ChevronsLeft,
   ChevronsRight,
   Filter,
+  Loader2,
   Search,
   SortAsc,
   SortDesc,
@@ -58,11 +59,13 @@ import { ExportImport } from "./export-import";
 import { globalPupilFilterFn, newSortingFns } from "./sorting-filter-fn";
 
 interface DataTableProps<TData, TValue> {
+  isFetching: boolean;
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
 export function DataTable<TData, TValue>({
+  isFetching,
   columns,
   data = [],
 }: DataTableProps<TData, TValue>) {
@@ -115,14 +118,17 @@ export function DataTable<TData, TValue>({
   return (
     <div className="w-full space-y-4">
       <div className="flex flex-wrap lg:justify-between sm:flex-row items-start sm:items-center gap-4">
-        <div className="relative flex-1 max-w-sm">
-          <Search className="absolute left-3 top-2.5 h-4 w-4 z-1" />
-          <Input
-            placeholder="Search pupils by name, email, or license type..."
-            value={globalFilter}
-            onChange={(event) => setGlobalFilter(event.target.value)}
-            className="pl-10 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border-0 shadow-sm"
-          />
+        <div className="flex flex-1 relative items-center gap-2 max-w-sm">
+          <div className="relative w-full">
+            <Search className="absolute left-3 top-2.5 h-4 w-4 z-1" />
+            <Input
+              placeholder="Search pupils by name, email, or license type..."
+              value={globalFilter}
+              onChange={(event) => setGlobalFilter(event.target.value)}
+              className="pl-10 bg-white/50 w-full dark:bg-gray-800/50 backdrop-blur-sm border-0 shadow-sm"
+            />
+          </div>
+          {isFetching && <Loader2 className="animate-spin w-fit" />}
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
@@ -415,7 +421,7 @@ export function PupilsDataTable({
     createPupilQueryOptions({ retry: 3 })
   );
 
-  if (isLoading || isFetching) {
+  if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center w-full">
         <Searching className="w-48 h-48" />
@@ -444,5 +450,11 @@ export function PupilsDataTable({
     );
   }
 
-  return <DataTable columns={columns} data={data?.data ?? []} />;
+  return (
+    <DataTable
+      isFetching={isFetching}
+      columns={columns}
+      data={data?.data ?? []}
+    />
+  );
 }

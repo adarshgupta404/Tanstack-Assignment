@@ -1,5 +1,7 @@
+import Searching from "@/components/loaders/searchingEmployees";
 import EditPupil from "@/components/pupils/edit/edit";
 import { createFileRoute } from "@tanstack/react-router";
+import { Suspense } from "react";
 
 export const Route = createFileRoute("/pupils/$id/edit/")({
   component: RouteComponent,
@@ -8,8 +10,15 @@ export const Route = createFileRoute("/pupils/$id/edit/")({
 function RouteComponent() {
   const { id } = Route.useParams();
   return (
-    <div>
+    <Suspense
+      fallback={
+        <div className="flex py-10 flex-col items-center justify-center w-full">
+          <Searching className="w-48 h-48" />
+          <span className="text-muted-foreground">Loading pupil...</span>
+        </div>
+      }
+    >
       <EditPupil id={id} />
-    </div>
+    </Suspense>
   );
 }

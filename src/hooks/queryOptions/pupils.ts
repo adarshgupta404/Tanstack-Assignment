@@ -21,11 +21,11 @@ export function createPupilQueryOptions(
   params?: { page?: number; limit?: number }
 ) {
   return queryOptions({
-    ...options,
     queryKey: userKeys.all,
     queryFn: () => pupilsApi.getAll(params),
     staleTime: 1000 * 60 * 5,
     refetchInterval: 1000 * 60 * 1,
+    ...options,
   });
 }
 
@@ -37,11 +37,11 @@ export function createPupilDetailQueryOptions(
   >
 ) {
   return queryOptions({
-    ...options,
     queryKey: userKeys.detail(id),
     queryFn: () => pupilsApi.getById(id),
     enabled: !!id,
     refetchInterval: 1000 * 60 * 1,
     staleTime: 1000 * 60 * 1,
+    ...options,
   });
 }
