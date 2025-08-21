@@ -19,7 +19,6 @@ import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { userKeys } from "@/hooks/queryOptions/pupils";
-import { tr } from "@faker-js/faker";
 import { deepDiff } from "@/lib/utils";
 
 interface PupilUpdateFormProps {
