@@ -79,7 +79,7 @@ export function PersonalDetailsStep({ control, register, errors, clearErrors }: 
             />
           </div>
           <div className="space-y-2">
-            <Label>Gender</Label>
+            <Label>Gender *</Label>
             <ControlledSelect
               name="gender"
               control={control}
