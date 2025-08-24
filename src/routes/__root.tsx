@@ -4,7 +4,7 @@ import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 
 import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
 
-import { Navbar } from "@/components/layouts/Navbar";
+import { Navbar } from "@/components/common/Navbar";
 import type { QueryClient } from "@tanstack/react-query";
 import { Toaster } from "sonner";
 

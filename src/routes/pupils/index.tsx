@@ -1,5 +1,4 @@
-
-import DashboardPage from "@/components/pupils/list/list";
+import DashboardPage from "@/components/pages/pupils/list/list";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/pupils/")({
@@ -7,9 +6,5 @@ export const Route = createFileRoute("/pupils/")({
 });
 
 function RouteComponent() {
-  return (
-    <main>
-      <DashboardPage />
-    </main>
-  );
+  return <DashboardPage />;
 }

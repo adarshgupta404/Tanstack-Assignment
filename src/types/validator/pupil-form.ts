@@ -63,7 +63,9 @@ export const pupilFormSchema = z.object({
     .max(50, "Surname must be less than 50 characters")
     .trim(),
   dob: z
-    .string()
+    .string({
+      message: "Date of birth is required",
+    })
     .refine(isValidDate, {
       message: "Invalid date format. Use YYYY-MM-DD format",
     })
@@ -76,6 +78,7 @@ export const pupilFormSchema = z.object({
       },
       { message: "Age must be between 16 and 100 years" }
     ),
+
   gender: z.enum(["Male", "Female", "Other"], {
     message: "Gender must be Male, Female, or Other",
   }),
@@ -84,7 +87,7 @@ export const pupilFormSchema = z.object({
 
   // Contact Information
   home: contactSchema,
-  allowTextMessaging: z.boolean(), // ❌ removed .default() to avoid conflict
+  allowTextMessaging: z.boolean(),
 
   // Address Information
   pickupAddress: addressSchema,

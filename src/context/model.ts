@@ -12,6 +12,4 @@ const getOpenCloseModel = create<OpenCloseMode>((set) => ({
   close: () => set({ isOpen: false }),
 }));
 
-
-
-export {getOpenCloseModel};
+export { getOpenCloseModel };

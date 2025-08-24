@@ -60,6 +60,7 @@ export const pupilsApi = {
   ): Promise<PupilsResponse<PupilSchemaType>> => {
     try {
       const { data } = await axiosInstance.put(`/pupils/${id}`, pupilData);
+      await new Promise((resolve) => setTimeout(resolve, 2000));
       return data;
     } catch (err: any) {
       return handleApiError(err);

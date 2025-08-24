@@ -1,20 +1,25 @@
-"use client"
-
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import type { PupilFormType } from "@/types/validator/pupil-form"
-import { GraduationCapIcon } from "lucide-react"
-import type { Control, FieldErrors } from "react-hook-form"
-import { ControlledDatePicker } from "../form-fields/controller-date-picker"
-import { ControlledSelect } from "../form-fields/controller-select"
-import { ControlledSwitch } from "../form-fields/controller-switch"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import type { PupilFormType } from "@/types/validator/pupil-form";
+import { GraduationCapIcon } from "lucide-react";
+import type { Control, FieldErrors } from "react-hook-form";
+import { ControlledDatePicker } from "../form-fields/controller-date-picker";
+import { ControlledSelect } from "../form-fields/controller-select";
+import { ControlledSwitch } from "../form-fields/controller-switch";
+import { FormField } from "../form-fields/form-field";
 
 interface LicenseTrainingStepProps {
-  control: Control<PupilFormType>
-  register: any
-  errors: FieldErrors<PupilFormType>
-  clearErrors: (name?: keyof PupilFormType) => void
+  control: Control<PupilFormType>;
+  register: any;
+  errors: FieldErrors<PupilFormType>;
+  clearErrors: (name?: keyof PupilFormType) => void;
 }
 
 const pupilTypeOptions = [
@@ -22,15 +27,20 @@ const pupilTypeOptions = [
   { value: "Automatic", label: "Automatic" },
   { value: "Motorcycle", label: "Motorcycle" },
   { value: "HGV", label: "HGV" },
-]
+];
 
 const licenseTypeOptions = [
   { value: "No License", label: "No License" },
   { value: "Provisional", label: "Provisional" },
   { value: "Full License", label: "Full License" },
-]
+];
 
-export function LicenseTrainingStep({ control, register, errors, clearErrors }: LicenseTrainingStepProps) {
+export function LicenseTrainingStep({
+  control,
+  register,
+  errors,
+  clearErrors,
+}: LicenseTrainingStepProps) {
   return (
     <Card className="border-2 pt-0 overflow-hidden border-primary/20">
       <CardHeader className="bg-gradient-to-r py-4 from-orange-50 to-red-50 dark:from-orange-950/20 dark:to-red-950/20">
@@ -43,35 +53,50 @@ export function LicenseTrainingStep({ control, register, errors, clearErrors }: 
       <CardContent className="space-y-6 pt-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
-            <Label>Pupil Type *</Label>
-            <ControlledSelect
-              name="pupilType"
-              control={control}
-              placeholder="Select pupil type"
-              options={pupilTypeOptions}
+            <FormField
+              label="Pupil Type"
+              htmlFor="pupilType"
+              required
               error={errors.pupilType?.message}
-            />
+            >
+              <ControlledSelect
+                name="pupilType"
+                control={control}
+                placeholder="Select pupil type"
+                options={pupilTypeOptions}
+              />
+            </FormField>
           </div>
 
           <div className="space-y-2">
-            <Label>License Type *</Label>
-            <ControlledSelect
-              name="licenseType"
-              control={control}
-              placeholder="Select license type"
-              options={licenseTypeOptions}
+            <FormField
+              label="License Type"
+              htmlFor="licenseType"
+              required
               error={errors.licenseType?.message}
-            />
+            >
+              <ControlledSelect
+                name="licenseType"
+                control={control}
+                placeholder="Select license type"
+                options={licenseTypeOptions}
+              />
+            </FormField>
           </div>
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="licenseNo">License Number</Label>
-          <Input
-            id="licenseNo"
-            {...register("licenseNo")}
-            className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
-          />
+          <FormField
+            label="License Number"
+            htmlFor="licenseNo"
+            error={errors.licenseNo?.message}
+          >
+            <Input
+              id="licenseNo"
+              {...register("licenseNo")}
+              className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
+            />
+          </FormField>
         </div>
 
         <div className="space-y-4">
@@ -112,5 +137,5 @@ export function LicenseTrainingStep({ control, register, errors, clearErrors }: 
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

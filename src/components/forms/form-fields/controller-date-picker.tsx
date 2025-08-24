@@ -35,7 +35,6 @@ export function ControlledDatePicker<T extends FieldValues>({
           />
         )}
       />
-      {error && <p className="text-sm text-destructive">{error}</p>}
     </div>
   )
 }

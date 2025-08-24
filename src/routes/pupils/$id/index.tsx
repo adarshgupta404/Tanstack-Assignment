@@ -1,5 +1,5 @@
 import PupilProfileSkeleton from "@/components/loaders/profile-skeleton";
-import ViewPupil from "@/components/pupils/view/view";
+import ViewPupil from "@/components/pages/pupils/view/view";
 import { createFileRoute } from "@tanstack/react-router";
 import { Suspense } from "react";
 

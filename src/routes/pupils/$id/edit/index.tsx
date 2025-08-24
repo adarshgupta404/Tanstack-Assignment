@@ -1,5 +1,5 @@
 import Searching from "@/components/loaders/searchingEmployees";
-import EditPupil from "@/components/pupils/edit/edit";
+import EditPupil from "@/components/pages/pupils/edit/edit";
 import { createFileRoute } from "@tanstack/react-router";
 import { Suspense } from "react";
 

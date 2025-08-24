@@ -21,6 +21,7 @@ import { AddressInformationStep } from "./form-steps/address-info-step";
 export default function ProfessionalPupilForm() {
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isValid, setIsValid] = useState(false);
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -47,6 +48,7 @@ export default function ProfessionalPupilForm() {
   const handleFormSubmit = async () => {
     try {
       const isValid = await trigger();
+      setIsValid(isValid);
       if (isValid) {
         const formData = form.getValues();
         setIsSubmitting(true);
@@ -72,6 +74,7 @@ export default function ProfessionalPupilForm() {
   const nextStep = async () => {
     const fieldsToValidate: any = getFieldsForStep(currentStep);
     const isValid = await trigger(fieldsToValidate);
+    setIsValid(isValid);
     if (isValid && currentStep < FORM_STEPS.length) {
       setCurrentStep(currentStep + 1);
     }
